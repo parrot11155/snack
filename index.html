@@ -1,0 +1,119 @@
+<h1>Welcome to my webpage</h1>
+
+<label>Choose a Snack:</label>
+
+<select id="snack" onchange="snackPriceCal()"> 
+<option>NONE</option>
+<option value= "chips" data-price="1.50">chips [$1.50]</option>
+<option value= "cookies" data-price="2.00">cookies [$2.00]</option>
+
+
+
+</select>
+<br>
+
+<label>Choose a Drink:</label>
+
+<select id="drink" onchange="drinkPriceCal()"> 
+<option>NONE</option>
+<option value= "fanta" data-price="1.50">fanta [$1.50]</option>
+<option value= "coke" data-price="2.00">coke [$2.00]</option>
+
+
+
+</select>
+
+
+
+
+<p id = "total">Snack Price: $0.00</p>
+
+<p id = "totalDrink">Drink Price: $0.00</p>
+
+<p id = "totalAll">Total Price: $0.00</p>
+
+<input type="text" id="name" placeholder="Enter your name">
+<br>
+<input type="text" id="city" placeholder="Enter your city">
+<br>
+<button onclick="nextPage()">Proceed to Checkout</button>
+
+<script>
+
+function snackPriceCal(){
+//step-1: identify the dropdown (select tag)
+
+const dropdown = document.querySelector("#snack")
+
+//step-2: 
+const selectedOption = dropdown.options[dropdown.selectedIndex]
+
+//step-3: 
+const snackPrice = selectedOption.getAttribute("data-price")
+
+//step-4:
+const actualPrice = parseFloat(snackPrice)
+
+//step-5:
+const formattedPrice = actualPrice.toFixed(2)
+
+//step-6:
+
+const totalPrice = document.getElementById("total").textContent = "Snack Price: $"+ formattedPrice
+
+// calling the totalPriceCal function to update the price
+totalPriceCal()
+
+}
+
+function drinkPriceCal(){
+//step-1: identify the dropdown (select tag)
+
+const dropdown = document.querySelector("#drink")
+
+//step-2: 
+const selectedOption = dropdown.options[dropdown.selectedIndex]
+
+//step-3: 
+const drinkPrice = selectedOption.getAttribute("data-price")
+
+//step-4:
+const actualPrice = parseFloat(drinkPrice)
+
+//step-5:
+const formattedPrice = actualPrice.toFixed(2)
+
+//step-6:
+
+const totalPrice = document.getElementById("totalDrink").textContent = "Drink Price: $"+ formattedPrice
+
+
+totalPriceCal()
+
+}
+
+// total price of drink and snack calculator
+function totalPriceCal(){
+  // Get snack price
+  const snackElement = document.getElementById("total");
+  const snackText = snackElement.textContent;
+  const snackPrice = snackText.includes("$") ? parseFloat(snackText.split("$")[1]) : 0;
+  
+  // Get drink price
+  const drinkElement = document.getElementById("totalDrink");
+  const drinkText = drinkElement.textContent;
+  const drinkPrice = drinkText.includes("$") ? parseFloat(drinkText.split("$")[1]) : 0;
+  
+  // Calculate total and update display
+  const totalPrice = snackPrice + drinkPrice;
+  document.getElementById("totalAll").textContent = "Total Price: $" + totalPrice.toFixed(2);
+}
+
+function nextPage(){
+  const name = document.getElementById("name").value;
+  const city = document.getElementById("city").value;
+  window.location.href = "display.html?name=" + encodeURIComponent(name) + "&city=" + encodeURIComponent(city);
+}
+	
+
+</script>
