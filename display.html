@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Confirmation</title>
+</head>
+<body onload="showName()">
+  <h1 id="displayName">Hello, Guest!</h1>
+  <p id="cityDisplay">From Unknown City</p>
+  
+  <script>
+    function showName() {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name") || "Guest";
+      const city = params.get("city") || "Unknown City";
+      document.getElementById("displayName").textContent = "Hello, " + name + "!";
+      document.getElementById("cityDisplay").textContent = "From " + city;
+    }
+  </script>
+</body>
+</html>
